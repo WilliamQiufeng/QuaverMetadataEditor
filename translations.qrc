@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>translations/QuaverMetadataChanger_en.ts</file>
+        <file>translations/QuaverMetadataChanger_zh.ts</file>
+    </qresource>
+</RCC>
