@@ -5,6 +5,8 @@
 #include "MapListModel.h"
 #include <QSettings>
 
+#include "MapStringEdit.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -23,6 +25,7 @@ private:
     Ui::MainWindow *ui;
     QMenu *fileMenu{};
     QAction *openMapsetAction{};
+    void openListEditDialog(MapStringEdit *mapStringEdit);
 
     void createMenus();
     void createActions();

@@ -27,6 +27,9 @@ set(PROJECT_SOURCES
         include/MapStringEdit.h src/MapStringEdit.cpp
         include/QVariantHasher.h
         ${TS_FILES}
+        include/MapListFieldEdit.h
+        src/MapListFieldEdit.cpp
+        src/MapListFieldEdit.ui
 )
 
 include_directories(include)

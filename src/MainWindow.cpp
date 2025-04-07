@@ -3,6 +3,9 @@
 #include <QFileDialog>
 #include <QDir>
 #include <QStringList>
+#include <ui_MapListFieldEdit.h>
+
+#include "MapListFieldEdit.h"
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), settings(new QSettings()) {
     ui->setupUi(this);
@@ -13,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     ui->mapList->setSelectionMode(QAbstractItemView::MultiSelection);
     ui->titleEdit->bind(ui->mapList, MapListModel::TitleRole);
     ui->tagsEdit->bind(ui->mapList, MapListModel::TagsRole);
+    connect(ui->tagsListEdit, &QPushButton::clicked, this, [&]{this->openListEditDialog(ui->tagsEdit);});
 }
 
 MainWindow::~MainWindow() {
@@ -40,6 +44,12 @@ void MainWindow::openMapset() {
     qInfo() << "Going through " << mapsetDir;
     mapListModel->setList(entries);
     ui->mapList->selectAll();
+}
+
+void MainWindow::openListEditDialog(MapStringEdit *mapStringEdit) {
+    auto dialog = MapListFieldEdit(this);
+    dialog.setMapStringEdit(mapStringEdit);
+    dialog.exec();
 }
 
 void MainWindow::createMenus() {
