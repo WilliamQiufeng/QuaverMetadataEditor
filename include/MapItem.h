@@ -3,13 +3,12 @@
 #include <QFileInfo>
 #include "QuaverMap.h"
 
-class MapItem
-{
+class MapItem {
 public:
     explicit MapItem(const QFileInfo &fileInfo);
 
     QFileInfo fileInfo;
-    QuaverMap* map;
+    QuaverMap *map;
 };
 
 #endif // MAPITEM_H

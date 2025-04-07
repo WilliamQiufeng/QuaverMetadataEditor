@@ -8,9 +8,11 @@
 #include "MapStringEdit.h"
 
 QT_BEGIN_NAMESPACE
+
 namespace Ui {
-class MainWindow;
+    class MainWindow;
 }
+
 QT_END_NAMESPACE
 
 class MainWindow final : public QMainWindow {
@@ -27,9 +29,12 @@ private:
     QAction *openMapsetAction{};
 
     void createMenus();
+
     void createActions();
+
     void openMapset();
-    MapListModel* mapListModel;
+
+    MapListModel *mapListModel;
     QSettings *settings;
 };
 #endif // MAINWINDOW_H

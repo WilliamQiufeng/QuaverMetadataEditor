@@ -17,6 +17,7 @@ public:
     };
 
     explicit MapListModel(QObject *parent = nullptr);
+
     // Basic implementations for a list model
     [[nodiscard]] int rowCount(const QModelIndex &parent) const override;
 

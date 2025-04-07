@@ -26,8 +26,10 @@ public:
     QString multipleValuesText;
 signals:
     void fieldValueChanged(QString content);
+
 private slots:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+
 public slots:
     void applyValue();
 

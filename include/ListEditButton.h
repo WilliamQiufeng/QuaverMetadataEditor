@@ -13,17 +13,20 @@
 class ListEditButton : public QPushButton {
 public:
     explicit ListEditButton(QWidget *parent = nullptr);
+
     ~ListEditButton();
-    void bind(MapStringEdit* mapStringEdit, QListView* mapList);
-    private:
-    MapStringEdit* mapStringEdit = nullptr;
-    QListView* mapList = nullptr;
-    private slots:
+
+    void bind(MapStringEdit *mapStringEdit, QListView *mapList);
+
+private:
+    MapStringEdit *mapStringEdit = nullptr;
+    QListView *mapList = nullptr;
+
+private slots:
     void updateEnabled();
 
     void openListEditDialog();
 };
-
 
 
 #endif //LISTEDITBUTTON_H

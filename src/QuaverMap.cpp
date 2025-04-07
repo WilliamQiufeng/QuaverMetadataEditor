@@ -1,7 +1,6 @@
 #include "QuaverMap.h"
 
 QuaverMap::QuaverMap() {
-
 }
 
 void QuaverMap::load(const std::string &str) {
@@ -11,7 +10,7 @@ void QuaverMap::load(const std::string &str) {
     title = node["Title"].as<std::string>();
 }
 
-void QuaverMap::serialise(YAML::Emitter& emitter) {
+void QuaverMap::serialise(YAML::Emitter &emitter) {
     node["DifficultyName"] = difficulty_name;
     node["Tags"] = tags;
     node["Title"] = title;

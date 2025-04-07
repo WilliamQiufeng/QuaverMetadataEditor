@@ -29,10 +29,14 @@ public:
 private:
     Ui::MapListFieldEdit *ui;
     MapStringEdit *mapStringEdit = nullptr;
+
 private slots:
     void add();
+
     void remove();
+
     void apply();
+
     void cancel();
 
 public:
