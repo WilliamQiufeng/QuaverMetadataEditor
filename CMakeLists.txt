@@ -16,21 +16,25 @@ set(TS_FILES translations/QuaverMetadataChanger_zh.ts translations/QuaverMetadat
 
 set(QT_I18N_TRANSLATED_LANGUAGES zh)
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        src/main.cpp
+        src/MainWindow.cpp
+        include/MainWindow.h
+        src/mainwindow.ui
+        include/MapListModel.h src/MapListModel.cpp
+        include/MapItem.h src/MapItem.cpp
+        include/QuaverMap.h src/QuaverMap.cpp
+        include/StringFieldEdit.h src/StringFieldEdit.cpp
+        include/MapStringEdit.h src/MapStringEdit.cpp
         ${TS_FILES}
 )
+
+include_directories(include)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(QuaverMetadataChanger
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        quavermap.h quavermap.cpp
         translations.qrc
-        maplistmodel.h maplistmodel.cpp
-        mapitem.h mapitem.cpp
         .gitignore
     )
 # Define target properties for Android with Qt 6 as:

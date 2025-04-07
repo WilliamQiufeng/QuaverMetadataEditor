@@ -51,14 +51,14 @@
      <item>
       <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
+           <widget class="QLabel" name="titleLabel">
          <property name="text">
           <string>Title</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit">
+           <widget class="MapStringEdit" name="titleEdit">
          <property name="placeholderText">
           <string>name of the mapset...</string>
          </property>
@@ -109,6 +109,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+    <customwidgets>
+        <customwidget>
+            <class>MapStringEdit</class>
+            <extends>QLineEdit</extends>
+            <header>MapStringEdit.h</header>
+        </customwidget>
+    </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -1,7 +1,7 @@
 #ifndef MAPITEM_H
 #define MAPITEM_H
 #include <QFileInfo>
-#include "quavermap.h"
+#include "QuaverMap.h"
 
 class MapItem
 {

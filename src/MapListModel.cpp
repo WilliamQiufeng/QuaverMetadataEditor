@@ -1,4 +1,4 @@
-#include "maplistmodel.h"
+#include "MapListModel.h"
 
 MapListModel::MapListModel(QObject *parent)
     : QAbstractListModel{parent}

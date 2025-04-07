@@ -1,4 +1,4 @@
-#include "quavermap.h"
+#include "QuaverMap.h"
 
 QuaverMap::QuaverMap() {
 

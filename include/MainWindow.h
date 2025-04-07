@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "maplistmodel.h"
+#include "MapListModel.h"
 #include <QSettings>
 
 QT_BEGIN_NAMESPACE

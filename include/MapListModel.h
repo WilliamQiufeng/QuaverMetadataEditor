@@ -2,7 +2,7 @@
 #define MAPLISTMODEL_H
 
 #include <QAbstractListModel>
-#include "mapitem.h"
+#include "MapItem.h"
 
 class MapListModel final : public QAbstractListModel {
     Q_OBJECT

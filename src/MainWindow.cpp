@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include "./ui_mainwindow.h"
 #include <QFileDialog>
 #include <QDir>
@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     mapListModel = new MapListModel();
     ui->mapList->setModel(mapListModel);
     ui->mapList->setSelectionMode(QAbstractItemView::MultiSelection);
+    // connect(ui->tagsEdit, &QLineEdit::mousePressEvent, this, [&]{qInfo() << "Hi";});
 }
 
 MainWindow::~MainWindow() {

@@ -1,4 +1,4 @@
-#include "mapitem.h"
+#include "MapItem.h"
 
 MapItem::MapItem(const QFileInfo& fileInfo) : fileInfo(QFileInfo(fileInfo)), map(new QuaverMap) {
     const auto file = new QFile(fileInfo.filePath());
