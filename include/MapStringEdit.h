@@ -17,7 +17,7 @@ public:
 
     ~MapStringEdit() override;
 
-    void bind(QAbstractItemView* view, int dataRole);
+    void bind(QAbstractItemView *view, int dataRole);
 
     void updateText();
 

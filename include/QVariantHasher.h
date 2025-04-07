@@ -12,11 +12,13 @@ public:
         bb.reserve(1000);
         buff.open(QIODevice::WriteOnly);
     }
-    uint hash(const QVariant & v) {
+
+    uint hash(const QVariant &v) {
         buff.seek(0);
         ds << v;
         return qHashBits(bb.constData(), buff.pos());
     }
+
 private:
     QByteArray bb;
     QBuffer buff;

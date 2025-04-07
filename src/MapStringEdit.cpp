@@ -31,7 +31,7 @@ void MapStringEdit::updateText() {
     QSet<QVariant> values;
     const auto selectedIndexes = view->selectionModel()->selectedIndexes();
 
-    for (const QModelIndex& idx : selectedIndexes) {
+    for (const QModelIndex &idx: selectedIndexes) {
         auto value = idx.data(dataRole);
         values.insert(value);
     }
@@ -55,12 +55,12 @@ void MapStringEdit::applyValue() const {
     auto newText = text();
     if (newText == multipleValuesText) return;
 
-    QAbstractItemModel* model = view->model();
+    QAbstractItemModel *model = view->model();
     if (!model) return;
 
     const auto selectedIndexes = view->selectionModel()->selectedIndexes();
-    for (const QModelIndex& idx : selectedIndexes) {
-        model->setData(idx, newText, dataRole);  // Update the specified role
+    for (const QModelIndex &idx: selectedIndexes) {
+        model->setData(idx, newText, dataRole); // Update the specified role
     }
 }
 
