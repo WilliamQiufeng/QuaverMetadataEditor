@@ -19,6 +19,8 @@ public:
 
     void bind(QAbstractItemView *view, int dataRole);
 
+    void makeCompleter(const QStringList &wordList);
+
     void updateText();
 
 private slots:
@@ -30,6 +32,7 @@ private:
     QAbstractItemView *view = nullptr;
     int dataRole;
     static QString multipleValuesText;
+    void focusInEvent(QFocusEvent *event) override;
 };
 
 

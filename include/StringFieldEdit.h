@@ -24,7 +24,7 @@ signals:
 private:
   QString textBeforeEdit;
   QAction *cancelAction;
-
+protected:
   void focusInEvent(QFocusEvent *event) override;
 
 private slots:

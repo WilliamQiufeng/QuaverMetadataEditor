@@ -7,6 +7,7 @@
 #include "MapStringEdit.h"
 
 #include "QVariantHasher.h"
+#include <QCompleter>
 
 inline uint qHash(const QVariant &key, uint seed) noexcept {
     return QVariantHasher().hash(key);
@@ -23,6 +24,13 @@ void MapStringEdit::bind(QAbstractItemView *view, const int dataRole) {
     connect(view->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MapStringEdit::selectionChanged);
     connect(this, &MapStringEdit::editingFinished, this, &MapStringEdit::applyValue);
     updateText();
+}
+
+void MapStringEdit::makeCompleter(const QStringList &wordList) {
+    const auto completer = new QCompleter(wordList, this);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    setCompleter(completer);
 }
 
 void MapStringEdit::updateText() {
@@ -45,6 +53,12 @@ void MapStringEdit::updateText() {
     } else {
         setText(multipleValuesText);
     }
+    QStringList wordList;
+    for (const auto& item : values) {
+        wordList.append(item.toString());
+    }
+
+    makeCompleter(wordList);
 }
 
 void MapStringEdit::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) {
@@ -62,6 +76,11 @@ void MapStringEdit::applyValue() const {
     for (const QModelIndex &idx: selectedIndexes) {
         model->setData(idx, newText, dataRole); // Update the specified role
     }
+}
+
+void MapStringEdit::focusInEvent(QFocusEvent *event) {
+    StringFieldEdit::focusInEvent(event);
+    completer()->complete();
 }
 
 QString MapStringEdit::multipleValuesText = tr("(Multiple Values)");
