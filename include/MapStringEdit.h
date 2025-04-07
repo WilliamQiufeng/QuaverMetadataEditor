@@ -25,7 +25,7 @@ public:
 
 private slots:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
-
+public slots:
     void applyValue() const;
 
 private:

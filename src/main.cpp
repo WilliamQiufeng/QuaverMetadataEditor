@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
+    // const QStringList uiLanguages = {"zh_CN"};
     auto x = findQmFiles();
     qInfo() << x;
     for (const QString &locale : uiLanguages) {

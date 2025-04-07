@@ -28,7 +28,12 @@ public:
 
 private:
     Ui::MapListFieldEdit *ui;
-    MapStringEdit *mapStringEdit;
+    MapStringEdit *mapStringEdit = nullptr;
+private slots:
+    void add();
+    void remove();
+    void apply();
+    void cancel();
 
 public:
     void setMapStringEdit(MapStringEdit *edit);
