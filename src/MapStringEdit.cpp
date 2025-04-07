@@ -6,8 +6,62 @@
 
 #include "MapStringEdit.h"
 
+#include "QVariantHasher.h"
 
-MapStringEdit::MapStringEdit(QWidget *parent) : StringFieldEdit(parent) {
+inline uint qHash(const QVariant &key, uint seed) noexcept {
+    return QVariantHasher().hash(key);
+}
+
+MapStringEdit::MapStringEdit(QWidget *parent) : StringFieldEdit(parent), dataRole(0) {
 }
 
 MapStringEdit::~MapStringEdit() = default;
+
+void MapStringEdit::bind(QAbstractItemView *view, const int dataRole) {
+    this->view = view;
+    this->dataRole = dataRole;
+    connect(view->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MapStringEdit::selectionChanged);
+    connect(this, &MapStringEdit::editingFinished, this, &MapStringEdit::applyValue);
+    updateText();
+}
+
+void MapStringEdit::updateText() {
+    if (view == nullptr) return;
+    // Update placeholder text based on selected items
+    QSet<QVariant> values;
+    const auto selectedIndexes = view->selectionModel()->selectedIndexes();
+
+    for (const QModelIndex& idx : selectedIndexes) {
+        auto value = idx.data(dataRole);
+        values.insert(value);
+    }
+
+    setReadOnly(values.isEmpty());
+
+    if (values.isEmpty()) {
+        setText("");
+    } else if (values.size() == 1) {
+        setText(values.begin()->toString());
+    } else {
+        setText(multipleValuesText);
+    }
+}
+
+void MapStringEdit::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) {
+    updateText();
+}
+
+void MapStringEdit::applyValue() const {
+    auto newText = text();
+    if (newText == multipleValuesText) return;
+
+    QAbstractItemModel* model = view->model();
+    if (!model) return;
+
+    const auto selectedIndexes = view->selectionModel()->selectedIndexes();
+    for (const QModelIndex& idx : selectedIndexes) {
+        model->setData(idx, newText, dataRole);  // Update the specified role
+    }
+}
+
+QString MapStringEdit::multipleValuesText = tr("(Multiple Values)");

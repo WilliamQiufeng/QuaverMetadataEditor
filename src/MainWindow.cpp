@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     mapListModel = new MapListModel();
     ui->mapList->setModel(mapListModel);
     ui->mapList->setSelectionMode(QAbstractItemView::MultiSelection);
-    // connect(ui->tagsEdit, &QLineEdit::mousePressEvent, this, [&]{qInfo() << "Hi";});
+    ui->titleEdit->bind(ui->mapList, MapListModel::TitleRole);
+    ui->tagsEdit->bind(ui->mapList, MapListModel::TagsRole);
 }
 
 MainWindow::~MainWindow() {

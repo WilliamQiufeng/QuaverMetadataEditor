@@ -25,6 +25,7 @@ set(PROJECT_SOURCES
         include/QuaverMap.h src/QuaverMap.cpp
         include/StringFieldEdit.h src/StringFieldEdit.cpp
         include/MapStringEdit.h src/MapStringEdit.cpp
+        include/QVariantHasher.h
         ${TS_FILES}
 )
 

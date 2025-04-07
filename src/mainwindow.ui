@@ -74,7 +74,7 @@
        <item row="1" column="1">
         <layout class="QHBoxLayout" name="tagsEditLayout">
          <item>
-          <widget class="QLineEdit" name="tagsEdit">
+             <widget class="MapStringEdit" name="tagsEdit">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;edit tags (comma separated)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>

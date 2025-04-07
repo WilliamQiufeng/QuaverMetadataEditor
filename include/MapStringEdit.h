@@ -5,6 +5,8 @@
 #ifndef MAPSTRINGEDIT_H
 #define MAPSTRINGEDIT_H
 
+#include <QAbstractItemView>
+
 #include "StringFieldEdit.h"
 
 class MapStringEdit : public StringFieldEdit {
@@ -15,7 +17,19 @@ public:
 
     ~MapStringEdit() override;
 
+    void bind(QAbstractItemView* view, int dataRole);
+
+    void updateText();
+
+private slots:
+    void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+
+    void applyValue() const;
+
 private:
+    QAbstractItemView *view = nullptr;
+    int dataRole;
+    static QString multipleValuesText;
 };
 
 

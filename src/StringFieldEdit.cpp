@@ -10,6 +10,7 @@
 StringFieldEdit::StringFieldEdit(QWidget *parent) {
     cancelAction = new QAction(tr("Cancel"), this);
     cancelAction->setShortcut(QKeySequence::Cancel);
+    cancelAction->setShortcutContext(Qt::WidgetWithChildrenShortcut);
     addAction(cancelAction);
     connect(cancelAction, &QAction::triggered, this, &StringFieldEdit::cancelEdit);
     connect(this, &StringFieldEdit::editingFinished, this, &StringFieldEdit::clearFocusAfterEdit);
