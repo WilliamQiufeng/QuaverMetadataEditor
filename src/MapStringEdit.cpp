@@ -54,7 +54,7 @@ void MapStringEdit::updateText() {
         setText(multipleValuesText);
     }
     QStringList wordList;
-    for (const auto& item : values) {
+    for (const auto &item: values) {
         wordList.append(item.toString());
     }
 

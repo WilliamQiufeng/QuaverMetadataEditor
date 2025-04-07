@@ -32,6 +32,7 @@ private:
     QAbstractItemView *view = nullptr;
     int dataRole;
     static QString multipleValuesText;
+
     void focusInEvent(QFocusEvent *event) override;
 };
 
