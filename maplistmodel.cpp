@@ -11,7 +11,7 @@ int MapListModel::rowCount(const QModelIndex &parent) const {
 
 QVariant MapListModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid() || index.row() >= items.size())
-        return QVariant();
+        return {};
 
     const MapItem &mapItem = items.at(index.row());
 
@@ -20,11 +20,10 @@ QVariant MapListModel::data(const QModelIndex &index, int role) const {
         return QString("%1 (%2)").arg(mapItem.map->difficulty_name).arg(mapItem.fileInfo.fileName());
     }
 
-    return QVariant();
+    return {};
 }
 
-void MapListModel::setList(QList<QFileInfo> files)
-{
+void MapListModel::setList(const QList<QFileInfo> &files) {
     beginResetModel();
     items.clear();
     for (const auto& file : files) {

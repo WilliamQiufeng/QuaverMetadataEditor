@@ -4,17 +4,18 @@
 #include <QAbstractListModel>
 #include "mapitem.h"
 
-class MapListModel : public QAbstractListModel
-{
+class MapListModel final : public QAbstractListModel {
     Q_OBJECT
+
 public:
     explicit MapListModel(QObject *parent = nullptr);
     // Basic implementations for a list model
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    [[nodiscard]] int rowCount(const QModelIndex &parent) const override;
 
-    QVariant data(const QModelIndex &index, int role) const override;
+    [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
 
-    void setList(QList<QFileInfo> files);
+    void setList(const QList<QFileInfo> &files);
+
 private:
     QList<MapItem> items;
 };

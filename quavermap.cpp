@@ -4,7 +4,7 @@ QuaverMap::QuaverMap() {
 
 }
 
-void QuaverMap::load(std::string str) {
+void QuaverMap::load(const std::string &str) {
     node = YAML::Load(str);
     difficulty_name = node["DifficultyName"].as<std::string>();
     tags = node["Tags"].as<std::string>();

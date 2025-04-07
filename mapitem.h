@@ -6,7 +6,8 @@
 class MapItem
 {
 public:
-    MapItem(const QFileInfo& fileInfo);
+    explicit MapItem(const QFileInfo &fileInfo);
+
     QFileInfo fileInfo;
     QuaverMap* map;
 };

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "maplistmodel.h"
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -10,21 +11,23 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow final : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+
+    ~MainWindow() override;
 
 private:
     Ui::MainWindow *ui;
-    QMenu* fileMenu;
-    QAction* openMapsetAction;
+    QMenu *fileMenu{};
+    QAction *openMapsetAction{};
+
     void createMenus();
     void createActions();
     void openMapset();
     MapListModel* mapListModel;
+    QSettings *settings;
 };
 #endif // MAINWINDOW_H

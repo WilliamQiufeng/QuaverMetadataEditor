@@ -13,7 +13,9 @@ public:
     std::string title;
     std::string tags;
     QuaverMap();
-    void load(std::string str);
+
+    void load(const std::string &str);
+
     void serialise(YAML::Emitter& emitter);
 };
 

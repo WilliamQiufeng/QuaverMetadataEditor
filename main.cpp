@@ -17,6 +17,9 @@ QStringList findQmFiles()
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QCoreApplication::setOrganizationName("WilliamQiufeng");
+    QCoreApplication::setOrganizationDomain("williamqiufeng");
+    QCoreApplication::setApplicationName("QuaverMetadataEditor");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
