@@ -14,6 +14,7 @@ inline uint qHash(const QVariant &key, uint seed) noexcept {
 }
 
 MapStringEdit::MapStringEdit(QWidget *parent) : StringFieldEdit(parent), dataRole(0) {
+    multipleValuesText = tr("(Multiple Values)");
 }
 
 MapStringEdit::~MapStringEdit() = default;
@@ -65,8 +66,8 @@ void MapStringEdit::selectionChanged(const QItemSelection &selected, const QItem
     updateText();
 }
 
-void MapStringEdit::applyValue() const {
-    auto newText = text();
+void MapStringEdit::applyValue() {
+    const auto newText = text();
     if (newText == multipleValuesText) return;
 
     QAbstractItemModel *model = view->model();
@@ -76,11 +77,10 @@ void MapStringEdit::applyValue() const {
     for (const QModelIndex &idx: selectedIndexes) {
         model->setData(idx, newText, dataRole); // Update the specified role
     }
+    emit fieldValueChanged(newText);
 }
 
 void MapStringEdit::focusInEvent(QFocusEvent *event) {
     StringFieldEdit::focusInEvent(event);
     completer()->complete();
 }
-
-QString MapStringEdit::multipleValuesText = tr("(Multiple Values)");

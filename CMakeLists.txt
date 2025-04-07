@@ -30,6 +30,8 @@ set(PROJECT_SOURCES
         include/MapListFieldEdit.h
         src/MapListFieldEdit.cpp
         src/MapListFieldEdit.ui
+        src/ListEditButton.cpp
+        include/ListEditButton.h
 )
 
 include_directories(include)

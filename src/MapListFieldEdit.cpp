@@ -79,7 +79,8 @@ void MapListFieldEdit::cancel() {
 
 void MapListFieldEdit::setMapStringEdit(MapStringEdit *edit) {
     mapStringEdit = edit;
-    auto items = mapStringEdit->text().split(',', Qt::SkipEmptyParts);
+    const auto text = mapStringEdit->text();
+    auto items = text.split(',', Qt::SkipEmptyParts);
     for (auto &item: items) {
         item = item.trimmed();
     }

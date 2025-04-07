@@ -23,15 +23,17 @@ public:
 
     void updateText();
 
+    QString multipleValuesText;
+signals:
+    void fieldValueChanged(QString content);
 private slots:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 public slots:
-    void applyValue() const;
+    void applyValue();
 
 private:
     QAbstractItemView *view = nullptr;
     int dataRole;
-    static QString multipleValuesText;
 
     void focusInEvent(QFocusEvent *event) override;
 };

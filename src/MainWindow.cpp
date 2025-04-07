@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     ui->mapList->setSelectionMode(QAbstractItemView::MultiSelection);
     ui->titleEdit->bind(ui->mapList, MapListModel::TitleRole);
     ui->tagsEdit->bind(ui->mapList, MapListModel::TagsRole);
-    connect(ui->tagsListEdit, &QPushButton::clicked, this, [&]{this->openListEditDialog(ui->tagsEdit);});
+    ui->tagsListEdit->bind(ui->tagsEdit, ui->mapList);
 }
 
 MainWindow::~MainWindow() {
@@ -44,12 +44,6 @@ void MainWindow::openMapset() {
     qInfo() << "Going through " << mapsetDir;
     mapListModel->setList(entries);
     ui->mapList->selectAll();
-}
-
-void MainWindow::openListEditDialog(MapStringEdit *mapStringEdit) {
-    auto dialog = MapListFieldEdit(this);
-    dialog.setMapStringEdit(mapStringEdit);
-    dialog.exec();
 }
 
 void MainWindow::createMenus() {
