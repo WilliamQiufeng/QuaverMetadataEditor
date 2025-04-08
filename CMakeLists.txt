@@ -6,11 +6,13 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+include(FetchContent)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+
 
 set(TS_FILES translations/QuaverMetadataChanger_zh.ts translations/QuaverMetadataChanger_en.ts)
 
@@ -36,9 +38,12 @@ set(PROJECT_SOURCES
         include/ListField.h
         src/ListField.ui
         include/qtyaml.h
+        src/FileField.cpp
+        include/FileField.h
+        src/FileField.ui
+        src/WorkspaceState.cpp
+        include/WorkspaceState.h
 )
-
-include_directories(include)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(QuaverMetadataChanger
@@ -73,20 +78,20 @@ qt_add_translations(QuaverMetadataChanger
     TS_OUTPUT_DIRECTORY translations
 )
 
+target_include_directories(QuaverMetadataChanger PUBLIC include)
 target_link_libraries(QuaverMetadataChanger PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 # --------------YAML------------------
-include(FetchContent)
 
 FetchContent_Declare(
   yaml-cpp
-  GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
-  GIT_TAG 0.8.0 # Can be a tag (yaml-cpp-x.x.x), a commit hash, or a branch name (master)
+  GIT_REPOSITORY https://github.com/WilliamQiufeng/yaml-cpp-quaver.git
+  GIT_TAG master # Can be a tag (yaml-cpp-x.x.x), a commit hash, or a branch name (master)
 )
 FetchContent_MakeAvailable(yaml-cpp)
+target_link_libraries(QuaverMetadataChanger PUBLIC yaml-cpp::yaml-cpp) # The library or executable that require yaml-cpp library
 # --------------YAML END--------------
 
-target_link_libraries(QuaverMetadataChanger PUBLIC yaml-cpp::yaml-cpp) # The library or executable that require yaml-cpp library
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

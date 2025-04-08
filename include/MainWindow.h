@@ -36,5 +36,7 @@ private:
 
     MapListModel *mapListModel;
     QSettings *settings;
+private slots:
+    void saveMaps();
 };
 #endif // MAINWINDOW_H

@@ -17,7 +17,8 @@ public:
         CreatorRole,
         PreviewTimeRole,
         BackgroundFileRole,
-        BannerFileRole
+        BannerFileRole,
+        AudioFileRole
     };
 
     explicit MapListModel(QObject *parent = nullptr);
@@ -31,8 +32,10 @@ public:
 
     void setList(const QList<QFileInfo> &files);
 
+    QList<MapItem> items();
+
 private:
-    QList<MapItem> items;
+    QList<MapItem> m_items;
 };
 
 #endif // MAPLISTMODEL_H

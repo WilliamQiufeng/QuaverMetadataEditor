@@ -6,14 +6,14 @@ MapListModel::MapListModel(QObject *parent)
 
 int MapListModel::rowCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
-    return items.size();
+    return m_items.size();
 }
 
 QVariant MapListModel::data(const QModelIndex &index, int role) const {
-    if (!index.isValid() || index.row() >= items.size())
+    if (!index.isValid() || index.row() >= m_items.size())
         return {};
 
-    const MapItem &mapItem = items.at(index.row());
+    const MapItem &mapItem = m_items.at(index.row());
 
     switch (role) {
         case Qt::DisplayRole:
@@ -35,15 +35,17 @@ QVariant MapListModel::data(const QModelIndex &index, int role) const {
             return mapItem.map->backgroundFile;
         case BannerFileRole:
             return mapItem.map->bannerFile;
+        case AudioFileRole:
+            return mapItem.map->audioFile;
         default:
             return {};
     }
 }
 
 bool MapListModel::setData(const QModelIndex &index, const QVariant &value, int role) {
-    if (!index.isValid() || index.row() >= items.size())
+    if (!index.isValid() || index.row() >= m_items.size())
         return false;
-    MapItem &mapItem = items[index.row()];
+    MapItem &mapItem = m_items[index.row()];
     switch (role) {
         case TitleRole:
             mapItem.map->title = value.toString();
@@ -69,6 +71,9 @@ bool MapListModel::setData(const QModelIndex &index, const QVariant &value, int 
         case BannerFileRole:
             mapItem.map->bannerFile = value.toString();
             break;
+        case AudioFileRole:
+            mapItem.map->audioFile = value.toString();
+            break;
         default:
             return false;
     }
@@ -78,10 +83,14 @@ bool MapListModel::setData(const QModelIndex &index, const QVariant &value, int 
 
 void MapListModel::setList(const QList<QFileInfo> &files) {
     beginResetModel();
-    items.clear();
+    m_items.clear();
     for (const auto &file: files) {
         auto mapInfo = MapItem(file);
-        items << mapInfo;
+        m_items << mapInfo;
     }
     endResetModel();
+}
+
+QList<MapItem> MapListModel::items() {
+    return m_items;
 }

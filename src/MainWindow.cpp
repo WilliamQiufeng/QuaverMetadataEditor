@@ -8,6 +8,8 @@
 #include "MapListFieldEdit.h"
 #include <QRegularExpressionValidator>
 
+#include "WorkspaceState.h"
+
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), settings(new QSettings()) {
     ui->setupUi(this);
     createActions();
@@ -22,6 +24,15 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     ui->creatorEdit->bind(ui->mapList, MapListModel::CreatorRole);
     ui->previewTimeEdit->bind(ui->mapList, MapListModel::PreviewTimeRole);
     ui->previewTimeEdit->setValidator(new QIntValidator());
+    ui->backgroundEdit->bind(ui->mapList, MapListModel::BackgroundFileRole);
+    const auto imageMask = tr("Image Files (*.png *.jpg *.jpeg)");
+    const auto audioMask = tr("Audio Files (*.mp3 *.wav *.ogg)");
+    ui->backgroundEdit->chooseFileMask = imageMask;
+    ui->bannerEdit->bind(ui->mapList, MapListModel::BannerFileRole);
+    ui->bannerEdit->chooseFileMask = imageMask;
+    ui->audioEdit->bind(ui->mapList, MapListModel::AudioFileRole);
+    ui->audioEdit->chooseFileMask = audioMask;
+    connect(ui->save, &QPushButton::clicked, this, &MainWindow::saveMaps);
 }
 
 MainWindow::~MainWindow() {
@@ -45,10 +56,27 @@ void MainWindow::openMapset() {
     settings->setValue("LastMapsetDir", mapsetPath);
 
     const auto mapsetDir = QDir(mapsetPath);
+    WorkspaceState::instance()->setCurrentFolder(mapsetDir);
     const auto entries = mapsetDir.entryInfoList({"*.qua"});
     qInfo() << "Going through " << mapsetDir;
     mapListModel->setList(entries);
     ui->mapList->selectAll();
+}
+
+void MainWindow::saveMaps() {
+    auto* model = dynamic_cast<MapListModel *>(ui->mapList->model());
+    for (const auto& item : model->items()) {
+        YAML::Emitter out;
+        out.SetIndent(2);
+        // out.SetMapFormat(YAML::Flow);
+        // out.SetSeqFormat(YAML::Flow);
+        auto path = item.fileInfo.dir().filePath(item.fileInfo.fileName() + ".bak");
+        item.map->serialise(out);
+        QFile file(path);
+        file.open(QIODevice::WriteOnly);
+        file.write(out.c_str());
+        file.close();
+    }
 }
 
 void MainWindow::createMenus() {

@@ -124,6 +124,36 @@
          <item row="3" column="1">
           <widget class="ListField" name="tagsEdit" native="true"/>
          </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="backgroundLabel">
+           <property name="text">
+            <string>Background</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="FileField" name="backgroundEdit" native="true"/>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="bannerLabel">
+           <property name="text">
+            <string>Banner</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="FileField" name="bannerEdit" native="true"/>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="audioLabel">
+           <property name="text">
+            <string>Audio</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="FileField" name="audioEdit" native="true"/>
+         </item>
         </layout>
        </item>
        <item>
@@ -193,6 +223,12 @@
    <class>ListField</class>
    <extends>QWidget</extends>
    <header>ListField.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FileField</class>
+   <extends>QWidget</extends>
+   <header>FileField.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
