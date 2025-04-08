@@ -32,6 +32,10 @@ set(PROJECT_SOURCES
         src/MapListFieldEdit.ui
         src/ListEditButton.cpp
         include/ListEditButton.h
+        src/ListField.cpp
+        include/ListField.h
+        src/ListField.ui
+        include/qtyaml.h
 )
 
 include_directories(include)

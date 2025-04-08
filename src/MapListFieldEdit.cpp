@@ -41,7 +41,6 @@ void MapListFieldEdit::remove() {
     std::sort(indicesToRemove.begin(), indicesToRemove.end(), std::greater<>());
     for (const auto &index: indicesToRemove) {
         int row = index.row();
-        qInfo() << "remove " << row;
         model->removeRow(row);
     }
 

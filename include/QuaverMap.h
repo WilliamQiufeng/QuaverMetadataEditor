@@ -1,6 +1,7 @@
 #ifndef QUAVERMAP_H
 #define QUAVERMAP_H
 
+#include <QString>
 #include <string>
 #include <yaml-cpp/yaml.h>
 
@@ -9,13 +10,20 @@ private:
     YAML::Node node;
 
 public:
-    std::string difficulty_name;
-    std::string title;
-    std::string tags;
+    QString difficultyName;
+    QString title;
+    QString tags;
+    QString source;
+    int previewTime;
+    QString artist;
+    QString creator;
+    QString audioFile;
+    QString backgroundFile;
+    QString bannerFile;
 
     QuaverMap();
 
-    void load(const std::string &str);
+    void load(const QString& str);
 
     void serialise(YAML::Emitter &emitter);
 };

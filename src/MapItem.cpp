@@ -7,6 +7,6 @@ MapItem::MapItem(const QFileInfo &fileInfo) : fileInfo(QFileInfo(fileInfo)), map
     const auto content = file->readAll();
     file->close();
     qInfo() << content.toStdString().substr(0, 100);
-    map->load(content.toStdString());
+    map->load(content);
     delete file;
 }

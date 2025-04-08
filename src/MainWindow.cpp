@@ -6,6 +6,7 @@
 #include <ui_MapListFieldEdit.h>
 
 #include "MapListFieldEdit.h"
+#include <QRegularExpressionValidator>
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), settings(new QSettings()) {
     ui->setupUi(this);
@@ -16,7 +17,11 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     ui->mapList->setSelectionMode(QAbstractItemView::MultiSelection);
     ui->titleEdit->bind(ui->mapList, MapListModel::TitleRole);
     ui->tagsEdit->bind(ui->mapList, MapListModel::TagsRole);
-    ui->tagsListEdit->bind(ui->tagsEdit, ui->mapList);
+    ui->artistEdit->bind(ui->mapList, MapListModel::ArtistRole);
+    ui->sourceEdit->bind(ui->mapList, MapListModel::SourceRole);
+    ui->creatorEdit->bind(ui->mapList, MapListModel::CreatorRole);
+    ui->previewTimeEdit->bind(ui->mapList, MapListModel::PreviewTimeRole);
+    ui->previewTimeEdit->setValidator(new QIntValidator());
 }
 
 MainWindow::~MainWindow() {

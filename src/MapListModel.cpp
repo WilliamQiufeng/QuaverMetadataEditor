@@ -18,11 +18,23 @@ QVariant MapListModel::data(const QModelIndex &index, int role) const {
     switch (role) {
         case Qt::DisplayRole:
             // Return the string to display in the view
-            return QString("%1 (%2)").arg(mapItem.map->difficulty_name).arg(mapItem.fileInfo.fileName());
+            return QString("%1 (%2)").arg(mapItem.map->difficultyName).arg(mapItem.fileInfo.fileName());
         case TitleRole:
-            return QString::fromStdString(mapItem.map->title);
+            return mapItem.map->title;
         case TagsRole:
-            return QString::fromStdString(mapItem.map->tags);
+            return mapItem.map->tags;
+        case ArtistRole:
+            return mapItem.map->artist;
+        case SourceRole:
+            return mapItem.map->source;
+        case CreatorRole:
+            return mapItem.map->creator;
+        case PreviewTimeRole:
+            return mapItem.map->previewTime;
+        case BackgroundFileRole:
+            return mapItem.map->backgroundFile;
+        case BannerFileRole:
+            return mapItem.map->bannerFile;
         default:
             return {};
     }
@@ -34,10 +46,28 @@ bool MapListModel::setData(const QModelIndex &index, const QVariant &value, int 
     MapItem &mapItem = items[index.row()];
     switch (role) {
         case TitleRole:
-            mapItem.map->title = value.toString().toStdString();
+            mapItem.map->title = value.toString();
             break;
         case TagsRole:
-            mapItem.map->tags = value.toString().toStdString();
+            mapItem.map->tags = value.toString();
+            break;
+        case ArtistRole:
+            mapItem.map->artist = value.toString();
+            break;
+        case SourceRole:
+            mapItem.map->source = value.toString();
+            break;
+        case CreatorRole:
+            mapItem.map->creator = value.toString();
+            break;
+        case PreviewTimeRole:
+            mapItem.map->previewTime = value.toInt();
+            break;
+        case BackgroundFileRole:
+            mapItem.map->backgroundFile = value.toString();
+            break;
+        case BannerFileRole:
+            mapItem.map->bannerFile = value.toString();
             break;
         default:
             return false;

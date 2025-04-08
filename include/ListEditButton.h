@@ -16,11 +16,11 @@ public:
 
     ~ListEditButton();
 
-    void bind(MapStringEdit *mapStringEdit, QListView *mapList);
+    void bind(MapStringEdit *mapStringEdit, QAbstractItemView *mapList);
 
 private:
     MapStringEdit *mapStringEdit = nullptr;
-    QListView *mapList = nullptr;
+    QAbstractItemView *mapList = nullptr;
 
 private slots:
     void updateEnabled();

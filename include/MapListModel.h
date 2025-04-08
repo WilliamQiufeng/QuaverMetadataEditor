@@ -10,10 +10,14 @@ class MapListModel final : public QAbstractListModel {
 public:
     enum Roles {
         TitleRole = Qt::UserRole + 1,
-        ArtistsRole,
+        ArtistRole,
         TagsRole,
         SourceRole,
         DifficultyNameRole,
+        CreatorRole,
+        PreviewTimeRole,
+        BackgroundFileRole,
+        BannerFileRole
     };
 
     explicit MapListModel(QObject *parent = nullptr);

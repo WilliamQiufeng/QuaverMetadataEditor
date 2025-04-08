@@ -14,7 +14,7 @@ ListEditButton::ListEditButton(QWidget *parent) : QPushButton(parent) {
 
 ListEditButton::~ListEditButton() = default;
 
-void ListEditButton::bind(MapStringEdit *mapStringEdit, QListView *mapList) {
+void ListEditButton::bind(MapStringEdit *mapStringEdit, QAbstractItemView *mapList) {
     this->mapStringEdit = mapStringEdit;
     this->mapList = mapList;
     connect(mapList->selectionModel(), &QItemSelectionModel::selectionChanged, this, &ListEditButton::updateEnabled);
